@@ -1,17 +1,5 @@
 FROM php:5.6.31-apache
 
-ENV HTTP_PROXY http://10.135.0.29:8080
-
-ENV HTTPS_PROXY http://10.135.0.29:8080
-
-ENV http_proxy http://10.135.0.29:8080
-
-ENV https_proxy http://10.135.0.29:8080
-
-ENV NO_PROXY localhost,127.0.0.1
-
-ENV no_proxy localhost,127.0.0.1
-
 # Install mcrypt, git, ssh-client
 RUN apt-get update &&\
   DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
