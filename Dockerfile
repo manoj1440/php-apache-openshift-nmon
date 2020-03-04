@@ -1,9 +1,9 @@
-FROM php:5.6.31-apache
+FROM php:7.1-apache
 
 # Install mcrypt, git, ssh-client
 RUN apt-get update &&\
   DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-  mcrypt nmon php5-mcrypt libmcrypt-dev libpng-dev libldb-dev libldap2-dev nano git ssh-client &&\
+  mcrypt nmon libmcrypt-dev libpng-dev libldb-dev libldap2-dev nano git ssh-client &&\
   docker-php-ext-install mcrypt &&\
   apt-get clean && rm -rf /tmp/* /var/tmp/* && rm -rf /var/lib/apt/lists/*
 
