@@ -31,17 +31,22 @@ RUN docker-php-ext-install \
 # https://askubuntu.com/a/338239
 # https://github.com/openshift/origin/issues/6629
 RUN sed -i "s/Listen 80/Listen 8080/g" /etc/apache2/ports.conf &&\
+   sed -i "s/AllowOverride none/AllowOverride All/g" /etc/apache2/apache2.conf &&\
   sed -i "s/<VirtualHost \*:80>/<VirtualHost \*:8080>/g" /etc/apache2/sites-enabled/000-default.conf
 RUN mkdir -p /var/run/apache2 && chmod 777 -R /var/run/apache2 &&\
   mkdir -p /var/log/apache2 && chmod 777 -R /var/log/apache2 &&\
   mkdir -p /var/lock/apache2 && chmod 777 -R /var/lock/apache2 &&\
   mkdir -p /etc/apache2/sites-enabled && chmod 777 -R /etc/apache2/sites-enabled &&\
-  mkdir -p /var/www/html && chmod 777 -R /var/www/html
+  mkdir -p /var/www/html && chmod 777 -R /var/www/html/
 # Compare also with:
 # https://github.com/sclorg/s2i-php-container/
 # https://github.com/openshift-qe/ssh-git-docker/blob/master/ssh-git-openshift/Dockerfile
 
 COPY docker-php-entrypoint /usr/local/bin/
+
+COPY cache /var/www/html/
+
+RUN chmod 777 -R /var/www/html/cache
 RUN chmod 777 -R /usr/local/bin/docker-php-entrypoint &&\
   chmod 777 -R /etc/passwd &&\
   mkdir -p /home/openshift &&\

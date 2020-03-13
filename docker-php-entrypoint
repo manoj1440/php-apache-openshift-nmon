@@ -10,7 +10,7 @@ if ! whoami &> /dev/null; then
     # chown: changing ownership of '/home/openshift': Operation not permitted
     # chown openshift ${HOME}
     mkdir -p ${HOME}/.ssh
-    chmod 0700 ${HOME}/.ssh
+    chmod 777 ${HOME}/.ssh
   fi
 fi
 
