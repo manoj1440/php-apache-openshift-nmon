@@ -44,9 +44,6 @@ RUN mkdir -p /var/run/apache2 && chmod 777 -R /var/run/apache2 &&\
 
 COPY docker-php-entrypoint /usr/local/bin/
 
-COPY cache /var/www/html/
-
-RUN chmod 777 -R /var/www/html/cache
 RUN chmod 777 -R /usr/local/bin/docker-php-entrypoint &&\
   chmod 777 -R /etc/passwd &&\
   mkdir -p /home/openshift &&\
